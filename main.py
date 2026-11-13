@@ -16,7 +16,11 @@ hide_debug_information()
 set_website_framed(False)
 
 
-
+@dataclass
+class Card:
+    suit: str
+    number: int
+    
 @dataclass
 class State:
     current_deck: list[Card]
@@ -25,11 +29,6 @@ class State:
     operations_tally: int
     status: str
 
-
-@dataclass
-class Card:
-    suit: str
-    number: int
 
 
 
