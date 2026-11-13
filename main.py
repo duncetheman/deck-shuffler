@@ -54,7 +54,7 @@ def deck_screen(state: State) -> Page:
         "\n",
         str(state.card_view_index + 1) + " / " + str(len(state.current_deck)),
         "\n",
-        str(get_name(state.current_deck[state.card_view_index]))
+        str(get_name(state.current_deck[state.card_view_index])),
         #create_ascii_art(state.current_deck[state.card_view_index]),
         "\n",
         TextBox("new_index",state.card_view_index+1),
