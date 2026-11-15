@@ -350,11 +350,13 @@ def put_back(state:State) -> Page:
         state.current_deck = newDeck
     else:
         state.current_deck += state.current_hand
+    state.card_view_index = 0
     return deck_screen(state)
 
 @route
 def throw_away(state: State) -> Page:
     state.current_hand = []
+    state.card_view_index = 0
     return deck_screen(state)
 
 @route
