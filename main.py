@@ -107,6 +107,7 @@ def remove_cards(deck: list[Card], amount: int, position:str) -> list[Card]:
         return deck[amount:]
     if position == "back":
         return deck[:len(deck)-amount]
+    return []
     
 def simple_shuffle(deck:list[Card]) -> list[Card]:
     # totally randomizes location of cards in deck
@@ -140,7 +141,7 @@ assert_equal(complex_shuffle([
         Card("spades",2),
         Card("spades",4),])
     
-def deal_cards(deck:list[Card],hand_size:int,draw_pos:str) -> list[Card]:
+def deal_cards(deck:list[Card],hand_size:int,draw_pos:str):
     # returns first the hand of how ever many cards, and second the new deck with said cards removed
     if not deck:
         return [], []
@@ -314,10 +315,10 @@ def hand(state:State, hand_size: str, draw_pos: str) -> Page:
         return deck_screen(state)
     
     
-    hand_size = int(hand_size)
+    int_hand_size = int(hand_size)
     
     #assign hand and deck
-    state.current_hand, state.current_deck = deal_cards(state.current_deck, hand_size, draw_pos)
+    state.current_hand, state.current_deck = deal_cards(state.current_deck, int_hand_size, draw_pos)
     state.recent_draw_pos = draw_pos
 
     
@@ -389,14 +390,13 @@ def go_to_card(state:State, new_index: str) -> Page:
     except ValueError:
         state.status = "Error: not a number!"
         return deck_screen(state)
-    new_index = int(new_index)
-    if isinstance(new_index, int):
-        if len(state.current_deck) < new_index-1:
-            state.card_view_index = len(state.current_deck)-1
-        elif new_index-1 < 0:
-            state.card_view_index = 0
-        else:
-            state.card_view_index = new_index-1
+    int_new_index = int(new_index)
+    if len(state.current_deck) < int_new_index-1:
+        state.card_view_index = len(state.current_deck)-1
+    elif int_new_index-1 < 0:
+        state.card_view_index = 0
+    else:
+        state.card_view_index = int_new_index-1
     return deck_screen(state)
     
 
